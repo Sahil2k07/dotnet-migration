@@ -1,4 +1,4 @@
-using DotnetMigration.Contract.Input;
+using DotnetMigration.Contract.Inputs;
 
 namespace DotnetMigration.Data.SQL;
 

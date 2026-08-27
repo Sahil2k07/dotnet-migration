@@ -1,4 +1,4 @@
-using DotnetMigration.Contract.Input;
+using DotnetMigration.Contract.Inputs;
 using DotnetMigration.Data.Context;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
