@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Apps/">
+    <Project Path="Apps/DotnetMigration.Migrator/DotnetMigration.Migrator.csproj" />
+  </Folder>
+  <Folder Name="/Libraries/">
+    <Project Path="Libraries/DotnetMigration.Contract/DotnetMigration.Contract.csproj" />
+    <Project Path="Libraries/DotnetMigration.Data/DotnetMigration.Data.csproj" />
+  </Folder>
+</Solution>
