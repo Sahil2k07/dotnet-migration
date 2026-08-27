@@ -16,26 +16,26 @@ public static class DatabaseExtension
                     (options, configuration) =>
                     {
                         options.Server =
-                            configuration["Database:DbServer"]
+                            configuration["Database:Server"]
                             ?? configuration["DB_SERVER"]
                             ?? throw new InvalidOperationException("Database server is required.");
 
                         options.Database =
-                            configuration["Database:DbDatabase"]
+                            configuration["Database:Database"]
                             ?? configuration["DB_DATABASE"]
                             ?? throw new InvalidOperationException(
                                 "Database database is required."
                             );
 
                         options.Username =
-                            configuration["Database:DbUsername"]
+                            configuration["Database:Username"]
                             ?? configuration["DB_USERNAME"]
                             ?? throw new InvalidOperationException(
                                 "Database username is required."
                             );
 
                         options.Password =
-                            configuration["Database:DbPassword"]
+                            configuration["Database:Password"]
                             ?? configuration["DB_PASSWORD"]
                             ?? throw new InvalidOperationException(
                                 "Database password is required."
