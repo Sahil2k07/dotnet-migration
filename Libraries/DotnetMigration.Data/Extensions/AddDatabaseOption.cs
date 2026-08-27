@@ -1,18 +1,8 @@
+using DotnetMigration.Data.Configurations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DotnetMigration.Data.Configuration;
-
-public sealed class DatabaseOptions
-{
-    public required string Server { get; set; }
-
-    public required string Database { get; set; }
-
-    public required string Username { get; set; }
-
-    public required string Password { get; set; }
-}
+namespace DotnetMigration.Data.Extensions;
 
 public static class DatabaseExtension
 {

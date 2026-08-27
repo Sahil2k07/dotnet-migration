@@ -1,4 +1,4 @@
-using DotnetMigration.Data.Configuration;
+using DotnetMigration.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 

@@ -1,5 +1,5 @@
-using DotnetMigration.Data.Configuration;
 using DotnetMigration.Data.Context;
+using DotnetMigration.Data.Extensions;
 using DotnetMigration.Data.SQL;
 using Microsoft.Extensions.DependencyInjection;
 
