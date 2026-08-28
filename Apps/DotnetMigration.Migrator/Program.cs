@@ -11,6 +11,7 @@ builder.Services.AddDotnetMigrationData();
 
 builder.Services.AddScoped<IMigrationHistoryService, MigrationHistoryService>();
 builder.Services.AddScoped<IMigrationFileService, MigrationFileService>();
+builder.Services.AddScoped<IMigrationExecutor, MigrationExecutor>();
 builder.Services.AddScoped<IMigrationRunner, MigrationRunner>();
 
 var app = builder.Build();
