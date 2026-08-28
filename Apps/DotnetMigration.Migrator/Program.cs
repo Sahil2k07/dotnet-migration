@@ -10,6 +10,7 @@ var builder = Host.CreateApplicationBuilder(args);
 builder.Services.AddDotnetMigrationData();
 
 builder.Services.AddScoped<IMigrationHistoryService, MigrationHistoryService>();
+builder.Services.AddScoped<IMigrationFileService, MigrationFileService>();
 builder.Services.AddScoped<IMigrationRunner, MigrationRunner>();
 
 var app = builder.Build();
