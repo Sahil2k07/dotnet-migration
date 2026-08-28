@@ -61,7 +61,8 @@ public sealed class MigrationFileService : IMigrationFileService
 
             string fileHash = GenerateHash(sql);
 
-            string filePath = Path.GetRelativePath(migrationsFilesPath, file).Replace('\\', '/');
+            string filePath = Path.GetRelativePath(AppContext.BaseDirectory, file)
+                .Replace('\\', '/');
 
             MigrationHistory? history = migrationHistories.FirstOrDefault(x =>
                 string.Equals(x.FilePath, filePath, StringComparison.OrdinalIgnoreCase)
