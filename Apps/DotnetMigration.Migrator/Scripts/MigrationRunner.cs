@@ -34,39 +34,39 @@ public sealed class MigrationRunner : IMigrationRunner
         var stopwatch = Stopwatch.StartNew();
 
         IReadOnlyList<MigrationFile> tables = await _fileService.GetMigrationFiles(
-            "Migrations/Tables",
-            "TABLE",
-            true
+            rootPath: "Migrations/Tables",
+            fileType: "TABLE",
+            throwOnChange: true
         );
 
         IReadOnlyList<MigrationFile> indexes = await _fileService.GetMigrationFiles(
-            "Migrations/Indexes",
-            "INDEX",
-            true
+            rootPath: "Migrations/Indexes",
+            fileType: "INDEX",
+            throwOnChange: true
         );
 
         IReadOnlyList<MigrationFile> views = await _fileService.GetMigrationFiles(
-            "Migrations/Views",
-            "VIEW",
-            false
+            rootPath: "Migrations/Views",
+            fileType: "VIEW",
+            throwOnChange: false
         );
 
         IReadOnlyList<MigrationFile> functions = await _fileService.GetMigrationFiles(
-            "Migrations/Functions",
-            "FUNCTION",
-            false
+            rootPath: "Migrations/Functions",
+            fileType: "FUNCTION",
+            throwOnChange: false
         );
 
         IReadOnlyList<MigrationFile> procedures = await _fileService.GetMigrationFiles(
-            "Migrations/Procedures",
-            "PROCEDURE",
-            false
+            rootPath: "Migrations/Procedures",
+            fileType: "PROCEDURE",
+            throwOnChange: false
         );
 
         IReadOnlyList<MigrationFile> triggers = await _fileService.GetMigrationFiles(
-            "Migrations/Triggers",
-            "TRIGGER",
-            false
+            rootPath: "Migrations/Triggers",
+            fileType: "TRIGGER",
+            throwOnChange: false
         );
 
         int totalPendingCount =
