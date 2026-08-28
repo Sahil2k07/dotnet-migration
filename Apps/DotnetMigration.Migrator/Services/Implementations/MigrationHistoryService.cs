@@ -12,6 +12,8 @@ public sealed class MigrationHistoryService : IMigrationHistoryService
 
     private readonly ILogger<MigrationHistoryService> _logger;
 
+    private IReadOnlyList<MigrationHistory>? _histories;
+
     public MigrationHistoryService(
         ISQLExecutor sqlExecutor,
         ILogger<MigrationHistoryService> logger
@@ -19,9 +21,16 @@ public sealed class MigrationHistoryService : IMigrationHistoryService
     {
         _sqlExecutor = sqlExecutor;
         _logger = logger;
+        _histories = null;
     }
 
     public async Task<IReadOnlyList<MigrationHistory>> GetMigrationHistories()
+    {
+        _histories ??= await LoadMigrationHistories();
+        return _histories;
+    }
+
+    private async Task<IReadOnlyList<MigrationHistory>> LoadMigrationHistories()
     {
         try
         {
@@ -131,37 +140,37 @@ public sealed class MigrationHistoryService : IMigrationHistoryService
     {
         await _sqlExecutor.ExecuteAsync(
             """"
-                IF NOT EXISTS (
-                    SELECT 1
-                    FROM sys.schemas
-                    WHERE name = 'migration'
-                )
-                BEGIN
-                    EXEC('CREATE SCHEMA [migration]')
-                END;
+            IF NOT EXISTS (
+                SELECT 1
+                FROM sys.schemas
+                WHERE name = 'migration'
+            )
+            BEGIN
+                EXEC('CREATE SCHEMA [migration]')
+            END;
 
-                 IF NOT EXISTS (
-                    SELECT 1
-                    FROM sys.tables t
-                    INNER JOIN sys.schemas s
-                    ON s.schema_id = t.schema_id
-                    WHERE s.name = 'migration' AND t.name = 'MigrationHistory'
-                )
-                BEGIN
-                    CREATE TABLE [migration].[MigrationHistory]
-                    (
-                        ID        BIGINT IDENTITY(1, 1) NOT NULL,
-                        FileName  NVARCHAR(150) NOT NULL,
-                        FilePath  NVARCHAR(500) NOT NULL,
-                        FileType  NVARCHAR(50) NOT NULL,
-                        FileHash  NVARCHAR(100) NOT NULL,
-                        CreatedAt DATETIME NOT NULL DEFAULT SYSUTCDATETIME(),
-                        AppliedAt DATETIME NOT NULL DEFAULT SYSUTCDATETIME(),
+            IF NOT EXISTS (
+                SELECT 1
+                FROM sys.tables t
+                INNER JOIN sys.schemas s
+                ON s.schema_id = t.schema_id
+                WHERE s.name = 'migration' AND t.name = 'MigrationHistory'
+            )
+            BEGIN
+                CREATE TABLE [migration].[MigrationHistory]
+                (
+                    ID        BIGINT IDENTITY(1, 1) NOT NULL,
+                    FileName  NVARCHAR(150) NOT NULL,
+                    FilePath  NVARCHAR(500) NOT NULL,
+                    FileType  NVARCHAR(50) NOT NULL,
+                    FileHash  NVARCHAR(100) NOT NULL,
+                    CreatedAt DATETIME NOT NULL DEFAULT SYSUTCDATETIME(),
+                    AppliedAt DATETIME NOT NULL DEFAULT SYSUTCDATETIME(),
 
-                        CONSTRAINT PK_MigrationHistory PRIMARY KEY (ID),
-                        CONSTRAINT UQ_MigrationHistory_FilePath UNIQUE (FilePath)
-                    );
-                END;
+                    CONSTRAINT PK_MigrationHistory PRIMARY KEY (ID),
+                    CONSTRAINT UQ_MigrationHistory_FilePath UNIQUE (FilePath)
+                );
+            END;
             """"
         );
     }
