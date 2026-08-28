@@ -75,7 +75,7 @@ The migration runner allows you to configure this behavior independently for eac
 ```csharp
 IReadOnlyList<MigrationFile> tables = await _fileService.GetMigrationFiles(
    rootPath: "Migrations/Tables",
-   fileType: "TABLE",
+   fileType: "TABLE", // Stored as FileType in migration history
    throwOnChange: true
 );
 
